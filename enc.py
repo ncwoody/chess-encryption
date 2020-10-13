@@ -1,5 +1,6 @@
 import chess
 from random import *
+from packets import *  # this imports my packets script so we can use those functions in this script
 
 # global variables for if each space is a 1 or a 0
 a1 = 1
@@ -67,8 +68,9 @@ f8 = 1
 g8 = 0
 h8 = 1
 
-# initializes the board as we start the program
+# initializes the board as we start the program and which turn it is
 board = chess.Board()
+turn = "Black"  # set to black cause we'll change before the game starts
 
 # this is our function which gets the move we're going to make
 def getmove(digit):
@@ -283,11 +285,18 @@ def getmove(digit):
     if x == 1:  # if the makemove() function is unsuccessful
         return 1  # returns the function so we do it again
     elif x == 0:  # the makemove() function is successful
-        if chess.WHITE == True:  # I think that there may be a way to say something like 'pawn to e4', but I cannot currently think of an easy way to find out what piece is at a certain location, so I'm going to skip that for now
-            print("White:", end = " ")
-        elif chess.BLACK == True:
+        if turn == "White":  # I think that there may be a way to say something like 'pawn to e4', but I cannot currently think of an easy way to find out what piece is at a certain location, so I'm going to skip that for now
+            print("White:", end = " ")  # also we should be able to just say chess.color or chess.WHITE, but I couldn't get that to work
+            send = "White: "
+        elif turn == "Black":
             print("Black:", end = " ")
+            send = "Black: "
         print("Move", first, "to", second)  # print the move we made- this format will likely be changed
+        send = send + "Move "
+        send = send + first
+        send = send + " to "
+        send = send + second
+        sendchess(send)
         return 0
 
 def printboard():  # function to print the board because I thought it was easier to use this function than remember the syntax for python chess
@@ -350,6 +359,10 @@ length = len(conv)  # length of the binary message we want to send
 for k in range (0, length):  # looping through the binary message we want to send
     digit = conv[k]  # getting the digit to send
     x = 1  # setting up our while loop
+    if turn == "White":  # we change the turn to the other color so we can print it out
+        turn = "Black"
+    elif turn == "Black":
+        turn = "White"
     while x == 1 or x == None:  # this allows us to go again if we randomly chose an invalid move or a move that didn't fit our criteria, also it kept returning as None for some reason, so I just said that was an unsuccessful go too
         x = getmove(digit)  # we start the function that chooses and executes our move- if it returns a 1, we will do the whole thing over again
 
