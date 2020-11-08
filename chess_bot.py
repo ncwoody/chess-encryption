@@ -49,4 +49,4 @@ async def on_message(message):
         await message.channel.send(enc.messagesend(uword))
         
       
-client.run('NzY1Nzc2NjM1MDg0ODAwMDIw.X4ZvEQ.YkLmObRSNdHnEmVJ2Ati9pPacSE')
+client.run('<bot code>')
