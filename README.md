@@ -1,6 +1,5 @@
 # chess
-I am making a proof of concept of a way to send binary data over a chess correspondence conversation, written in python.
-  The encryption function uses the python chess library, which can be found here: https://github.com/niklasf/python-chess.
-  Essentially each move will send one binary digit, so you can send relevant information, it would just take a very very long time.
-  Right now this is just a proof of concept, but if I am board enough or if this somehow gets enough attention I may make a full-blown app out of this.
-  Born out of my interest in sending data over normal forms of communication and in using binary digits for data exfiltration.
+Same as the other chess correspndence program except it can be run over discord as a bot.
+Can also be used to have discord users play chess correspondence with each other.
+If you want to run it, put your own bot token in the the corresponding line of code.
+There is a help function which tells you the commands for the bot with "!help".
